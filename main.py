@@ -5,11 +5,17 @@ from tools.file_tool import read_file
 from tools.cpp_tool import run_cpp
 from tools.compile_cpp import compile_cpp
 from tools.write_file import write_file
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = OpenAI(
     api_key = os.environ.get("DEEPSEEK_API_KEY"),
     base_url = "https://api.deepseek.com",
 )
+
+if not os.getenv("DEEPSEEK_API_KEY"):
+    raise Exception("请配置 .env 文件中的 DEEPSEEK_API_KEY")
 
 tools = [
     {
